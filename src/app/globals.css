@@ -25,3 +25,38 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+button:hover{
+  scale: 1.1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    top: 50px;
+  }
+  to {
+    opacity: 1;
+    top: 0px;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    opacity: 0;
+    left: -50px;
+  }
+}
+
+
+.fade-in-button {
+  animation: fadeIn 300ms ease-in-out;
+}
+
+.fade-out-button {
+  animation: fadeOut 300ms ease-in-out;
+}
