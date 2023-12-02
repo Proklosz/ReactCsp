@@ -17,6 +17,7 @@
 }
 
 body {
+  padding:15px;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -27,17 +28,20 @@ body {
 }
 
 button:hover{
-  scale: 1.1;
+  scale: 1.05;
+}
+.ccp:hover{
+  background: red;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    top: 50px;
+    
   }
   to {
     opacity: 1;
-    top: 0px;
+    
   }
 }
 
@@ -59,4 +63,24 @@ button:hover{
 
 .fade-out-button {
   animation: fadeOut 300ms ease-in-out;
+}
+
+
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
 }
