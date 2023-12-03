@@ -39,6 +39,7 @@ export default function App() {
       const stockLength = document.getElementById("stockLength" + i);
       if (stockLength) {
         data[2].push(stockLength.value);
+        data[2].sort((a, b) => a - b)
       }
       const stockQuantity = document.getElementById("stockQuantity" + i);
       if (stockQuantity && stockQuantity.value) {
@@ -65,22 +66,23 @@ export default function App() {
       if (response.ok) {
         console.log("Data sent successfully");
         setResults(responseData)
-        setinputdata(data)
-        setTimeout(() => {
-          const R = document.getElementById("results")
-        R.scrollIntoView({ behavior: "smooth" })
-        }, 300);
-        
+          setinputdata(data)
+          setTimeout(() => {
+            const R = document.getElementById("results")
+          R.scrollIntoView({ behavior: "smooth" })
+          }, 300);
+          console.log("result generated successfully");
         
       } else {
         console.error("Failed to send data");
       }
     } catch (error) {
       console.error("Error sending data:", error);
+      }
     }
 
     
-  };
+  
 
   return (
     <div className="flex flex-col items-center justify-center max-w-screen overflow-x-hidden min-h-screen z-10 ">

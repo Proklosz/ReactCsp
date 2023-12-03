@@ -5,6 +5,14 @@ import { useState } from "react";
 import Demandinput from "../demandinput/page";
 
 export default function Demandform() {
+  const colors = [
+    "rgb(124, 22, 0)",
+    "rgb(10, 124, 0)",
+    "rgb(0, 30, 124)",
+    "rgb(124, 106, 0)",
+    "rgb(124, 0, 122)",
+    "rgb(0, 120, 124)",
+  ];
   const [demandInputs, setDemandInputs] = useState([]);
   const [didCounter, setDIdCounter] = useState(0);
   const [fadeOutId, setFadeOutId] = useState(null);
@@ -39,7 +47,7 @@ export default function Demandform() {
         className="flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[2px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden"
         style={{ height: `calc(${demandInputs.length} * 70px + 100px)` }}
       >
-        <h2 className="flex left-2 text-lg pb-2 text-[35px]">Demands</h2>
+        <h2 className="flex left-2 text-lg pb-2 text-[34px]">Demands</h2>
         <div className="relative w-full">
           {demandInputs.map((demandInput, index) => (
             <div
@@ -51,7 +59,8 @@ export default function Demandform() {
               }`}
               style={{ top: `calc(${index} * 70px)` }}
             >
-              <div className=" w-16 h-14 justify-center text-center bg-zinc-800 text-white text-[30px] pt-1 rounded-md border-2 border-zinc-500 m-2">
+              <div className=" w-16 h-14 justify-center text-center bg-zinc-800 text-white text-[30px] pt-1 rounded-md border-2 border-zinc-500 m-2"
+              style={{ background: `${colors[index]}` }}>
                 {index + 1}
               </div>
               {demandInput}

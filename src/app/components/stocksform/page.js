@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Stockinput from "../stockinput/page";
 
 export default function Stockform() {
+  
   const [stockInputs, setStockInputs] = useState([]);
   const [idCounter, setIdCounter] = useState(0);
   const [fadeOutId, setFadeOutId] = useState(null);
@@ -17,7 +18,6 @@ export default function Stockform() {
         key={newId}
         id={newId}
         onRemove={() => removeStockInput(newId)}
-
       />,
     ]);
     setIdCounter(newId);
@@ -41,7 +41,7 @@ export default function Stockform() {
         className="flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[2px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden"
         style={{ height: `calc(${stockInputs.length} * 70px + 170px)` }}
       >
-        <h2 className="flex left-2 text-lg pb-2 text-[35px] ">Stocks</h2>
+        <h2 className="flex left-2 text-lg pb-2 text-[34px] ">Stocks</h2>
         <div className=" relative top-0 box-border h-14 overflow-visible w-2/3 flex flex-col-3 justify-center bg-zinc-800 text-white p-2 rounded-md border-2 border-zinc-500 mt-2 mb-2">
           <div className="flex flex-col-2">
             <label className=" w-[100%] inline-flex relative items-center text-[20px] ">
