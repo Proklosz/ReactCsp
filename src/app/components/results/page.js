@@ -2,7 +2,7 @@ import React from "react";
 import { useRef } from "react";
 
 export default function Createresults({ response, inputdata }) {
-  if (response != null && response.result != null) {
+  if (response != null && response.result != 0 && inputdata != null && inputdata != 0) {
     const colors = [
       "rgb(124, 22, 0)",
       "rgb(10, 124, 0)",
@@ -32,7 +32,7 @@ export default function Createresults({ response, inputdata }) {
 
     return (
       <div className="flex flex-col items-center w-full " id="results">
-        <div className=" relative flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[2px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden">
+        <div className="sfc relative flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[2px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden">
           <h2 className="flex left-2 text-lg pb-2 text-[34px] ">Results</h2>
 
           <div className=" relative fade-in-button overflow-x-hidden w-[95%] flex flex-col float-left items-left transition-all duration-300 ease-in-out justify-center bg-zinc-800 text-white p-2 pl-4 pr-4 rounded-md border-2 border-zinc-500 mt-2 h-auto">
@@ -57,8 +57,14 @@ export default function Createresults({ response, inputdata }) {
               }
             })}
 
-            <div className="flex flex-col-2 pb-4">
-              <div className="flex flex-col w-3/4">
+            <div className="flex flex-col-2 pb-4 responzivecol22">
+            <div className="flex w-1/2 responzivecol text-[72px] font-extrabold justify-center text-center items-center">
+                {parseFloat((totaldemandlength / totalcutlength) * 100).toFixed(
+                  2
+                )}
+                %
+              </div>
+              <div className="flex flex-col w-3/4 responzivecol transition-all duration-150 ease-in-out">
                 <div className="w-full p-2 pt-0 pb-0">
                   <div className=" relative w-full flex felx-col-2">
                     <div className=" relative w-full flex text-[20px]">
@@ -107,19 +113,15 @@ export default function Createresults({ response, inputdata }) {
                   );
                 })}
               </div>
+              
 
-              <div className="flex w-1/2 text-[72px] font-extrabold justify-center text-center items-center">
-                {parseFloat((totaldemandlength / totalcutlength) * 100).toFixed(
-                  2
-                )}
-                %
-              </div>
+              
             </div>
 
             <div className="w-full h-[3px] bg-zinc-700 mt-4 mb-2"></div>
 
-            <div className="flex flex-col-2">
-              <div className="w-1/2 p-2">
+            <div className="flex flex-col-2 responzivecol22">
+              <div className="w-1/2 p-2 responzivecol">
                 <div className=" relative w-full flex felx-col-2">
                   <div className=" relative w-3/4 flex">
                     Total pieces demanded :
@@ -148,7 +150,7 @@ export default function Createresults({ response, inputdata }) {
                 </div>
               </div>
 
-              <div className="w-1/2 p-2">
+              <div className="w-1/2 p-2 responzivecol">
                 <div className=" relative w-full flex felx-col-2">
                   <div className=" relative w-3/4 flex">Total pieces cut :</div>
                   <div className=" relative flex w-1/4 font-extrabold">
@@ -207,7 +209,7 @@ export default function Createresults({ response, inputdata }) {
                     {response.result[1][index][1]}{" "}
                     <span className="text-zinc-300 font-normal">mm</span>
                   </div>
-                  <div className=" relative w-1/2 flex flex-col mt-4">
+                  <div className=" mintacont relative w-1/2 flex flex-col mt-4">
                     <div className=" relative w-full flex felx-col-2">
                       <div className=" relative w-3/4 flex">Yield :</div>
                       <div className=" relative flex w-1/4 font-extrabold">
@@ -245,7 +247,7 @@ export default function Createresults({ response, inputdata }) {
                     </div>
                   </div>
                   <div
-                    className={`relative fade-in-button overflow-x-hidden h-14 flex transition-all duration-300 ease-in-out justify-start bg-zinc-600 text-white rounded-md border-2 border-zinc-500 mt-2 mb-2`}
+                    className={` part relative fade-in-button overflow-x-hidden h-14 flex transition-all duration-300 ease-in-out justify-start bg-zinc-600 text-white rounded-md border-2 border-zinc-500 mt-2 mb-2`}
                     style={{
                       width: `calc(${
                         response.result[1][index][1] / maxInput
@@ -253,12 +255,17 @@ export default function Createresults({ response, inputdata }) {
                     }}
                   >
                     {response.result[1][index][0].map((item, itemIndex) => {
+                      let deg = 0
+                      if(window.screenX < 700){
+                        deg = 90
+                        console.log(window.screenX, deg)
+                      }
                       if (item !== 0) {
                         return Array.from({ length: item }).map(
                           (_, repeatIndex) => (
                             <div
                               key={repeatIndex}
-                              className={`relative inline-flex items-center text-center justify-center overflow-visible font-extrabold bg-zinc-900 text-white p-2  border-2 border-zinc-00 rounded-md h-13`}
+                              className={` relative inline-flex items-center text-center justify-center overflow-visible font-extrabold bg-zinc-900 text-white p-2  border-2 border-zinc-00 rounded-md h-13`}
                               style={{
                                 width: `calc(${
                                   inputdata[0][itemIndex] /
@@ -267,10 +274,12 @@ export default function Createresults({ response, inputdata }) {
                                 background: `${colors[itemIndex]}`,
                               }}
                             >
+                              <p className="labell transition-all duration-150 ease-in-out">
                               {inputdata[0][itemIndex]}
                               <span className=" text-zinc-300 font-normal">
                                 mm
                               </span>
+                              </p>
                             </div>
                           )
                         );

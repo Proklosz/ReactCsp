@@ -52,7 +52,8 @@ export default function App() {
     console.log(data);
 
     try {
-      const response = await fetch("https://lp.hogye.dev/api/run_Script", {
+      // const response = await fetch("https://lp.hogye.dev/api/run_Script", {
+      const response = await fetch("http://localhost:8001/api/run_Script", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +70,10 @@ export default function App() {
           setinputdata(data)
           setTimeout(() => {
             const R = document.getElementById("results")
-          R.scrollIntoView({ behavior: "smooth" })
+            if(R){
+              R.scrollIntoView({ behavior: "smooth" })
+
+            }
           }, 300);
           console.log("result generated successfully");
         
@@ -92,7 +96,7 @@ export default function App() {
 
         <button
           type="submit"
-          className="relative w-1/4 items-center bg-zinc-600 active:bg-green-700 p-3 rounded-md border-2 border-zinc-200 mb-4"
+          className="relative w-[300px] items-center bg-zinc-600 active:bg-green-700 p-3 rounded-md border-2 border-zinc-200 mb-4"
           onClick={handleSubmit}
         >
           Calculate cutting plan
