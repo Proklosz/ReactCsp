@@ -2,26 +2,54 @@ import React from "react";
 import { useRef } from "react";
 import Loading from "../loading/page";
 
-export default function Createresults({ response, inputdata, clicked }) {
+export default function Createresults({ response, inputdata, clicked, wrongdata }) {
   if (clicked == true) {
     return (
       <div className="flex flex-col items-center w-full z-50" id="results">
         <div className="sfc relative flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[5px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden">
-          <h2 className="flex left-2 text-lg pb-2 text-[34px] ">Calculating...</h2>
+          <h2 className="flex left-2 text-lg pb-2 text-[34px] ">
+            Calculating...
+          </h2>
           <Loading />
         </div>
       </div>
     );
-  }else if(response.result == 0 && clicked == false){
+  } else if (response.result == 0 && clicked == false) {
     return (
       <div className="flex flex-col items-center w-full z-50" id="results">
         <div className="sfc relative flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[5px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden">
-          <h2 className="flex left-2 text-lg pb-2 text-[38px] text-red-400 ">ERROR</h2>
-          <p className=" relative flex left-2 text-lg h-52 pb-2 text-md text-red-400 ">-Timeout</p>
+          <h2 className="flex left-2 text-lg pb-2 text-[38px] text-red-400 ">
+            ERROR
+          </h2>
+          <p className=" relative flex left-2 text-lg h-52 pb-2 text-md text-red-400 ">
+            -Timeout
+          </p>
         </div>
       </div>
     );
-  }else if(
+  } else if (
+    wrongdata === true &&
+    clicked === false
+
+  ) {
+    return (
+      <div className="flex flex-col items-center w-full z-50" id="results">
+        <div className="sfc relative flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[5px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden">
+          <h2 className="flex left-2 text-lg pb-2 text-[38px] text-red-400 ">
+            ERROR
+          </h2>
+          <p className=" relative flex flex-col left-2 text-lg pb-2 text-md text-red-400 ">
+            -Uncool inputs: <br></br>
+            <p className=" relative flex left-8 text-lg pb-2 text-md text-red-400 ">
+              - "Stock length" <br></br>- "Demand length" <br></br>- "Demand
+              quantity" <br></br>
+            </p>
+            -fields must have a valid integer value
+          </p>
+        </div>
+      </div>
+    );
+  } else if (
     response != null &&
     response.result != 0 &&
     inputdata != null &&
@@ -269,25 +297,20 @@ export default function Createresults({ response, inputdata, clicked }) {
                     </div>
                   </div>
                   <div
-                    className={` part relative fade-in-button overflow-x-hidden h-14 flex transition-all duration-300 ease-in-out justify-start bg-zinc-600 text-white rounded-md border-2 border-zinc-500 mt-2 mb-2`}
+                    className={` part relative fade-in-button overflow-x-visible h-14 flex transition-all duration-300 ease-in-out justify-start bg-zinc-600 text-white rounded-md border-2 border-zinc-500 mt-2 mb-2`}
                     style={{
                       width: `calc(${
                         response.result[1][index][1] / maxInput
-                      } * 100%`,
+                      } * 100%)`,
                     }}
                   >
                     {response.result[1][index][0].map((item, itemIndex) => {
-                      let deg = 0;
-                      if (window.screenX < 700) {
-                        deg = 90;
-                        console.log(window.screenX, deg);
-                      }
                       if (item !== 0) {
                         return Array.from({ length: item }).map(
                           (_, repeatIndex) => (
                             <div
                               key={repeatIndex}
-                              className={` relative inline-flex items-center text-center justify-center overflow-visible font-extrabold bg-zinc-900 text-white p-2  border-2 border-zinc-00 rounded-md h-13`}
+                              className={` relative flex items-center text-center justify-center overflow-visible font-extrabold bg-zinc-900 text-white  border-2 border-zinc-00 rounded-md h-13`}
                               style={{
                                 width: `calc(${
                                   inputdata[0][itemIndex] /

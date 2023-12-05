@@ -12,10 +12,12 @@ export default function App() {
   const [Results, setResults] = useState([]);
   const [inputdata, setinputdata] = useState([]);
   const [calcclicked, setcalcclicked] = useState(false);
+  const [wrongdata, setwrongdata] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setcalcclicked(true);
+    setwrongdata(false);
     console.log(calcclicked);
     setTimeout(() => {
       const R = document.getElementById("results");
@@ -72,9 +74,11 @@ export default function App() {
 
       if (response.ok) {
         console.log("Data sent successfully");
+        
         setResults(responseData);
         setinputdata(data);
         setcalcclicked(false);
+
         console.log(calcclicked);
         setTimeout(() => {
           const R = document.getElementById("results");
@@ -88,6 +92,7 @@ export default function App() {
         console.error("Failed to send data");
         setcalcclicked(false);
         console.log(calcclicked);
+        setwrongdata(true);
       }
     } catch (error) {
       console.error("Error sending data:", error);
@@ -114,6 +119,7 @@ export default function App() {
           response={Results}
           inputdata={inputdata}
           clicked={calcclicked}
+          wrongdata={wrongdata}
         />
       </div>
       <BG />
