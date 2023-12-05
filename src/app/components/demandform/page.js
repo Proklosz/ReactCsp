@@ -6,12 +6,12 @@ import Demandinput from "../demandinput/page";
 
 export default function Demandform() {
   const colors = [
-    "rgb(124, 22, 0)",
-    "rgb(10, 124, 0)",
-    "rgb(0, 30, 124)",
-    "rgb(124, 106, 0)",
-    "rgb(124, 0, 122)",
-    "rgb(0, 120, 124)",
+    "#966969",
+    "#6E9669",
+    "#697B96",
+    "#969669",
+    "#926996",
+    "#699690",
   ];
   const [demandInputs, setDemandInputs] = useState([]);
   const [didCounter, setDIdCounter] = useState(0);
@@ -44,7 +44,7 @@ export default function Demandform() {
   return (
     <div className="flex flex-col items-center w-full ">
       <div
-        className="sfc flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[2px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden"
+        className="sfc flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[5px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden"
         style={{ height: `calc(${demandInputs.length} * 70px + 100px)` }}
       >
         <h2 className="flex left-2 text-lg pb-2 text-[34px]">Demands</h2>
@@ -66,7 +66,7 @@ export default function Demandform() {
               {demandInput}
               <button
                 type="button"
-                className="bg-red-500 active:bg-red-400 m-2 w-20 h-14 text-white p-2 rounded-md border-2 border-red-300 rmb"
+                className="bg-[#ae6969] active:bg-red-400 m-2 w-20 h-14 text-white p-2 rounded-md border-2 border-red-300 rmb"
                 onClick={demandInput.props.onRemove}
               >
                 Remove

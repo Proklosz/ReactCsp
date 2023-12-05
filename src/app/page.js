@@ -6,17 +6,23 @@ import Stockform from "./components/stocksform/page";
 import Demandform from "./components/demandform/page";
 import BG from "./components/backgroung/page";
 import Createresults from "./components/results/page";
+import Description from "./components/description/page";
 
 export default function App() {
-  
-
   const [Results, setResults] = useState([]);
   const [inputdata, setinputdata] = useState([]);
+  const [calcclicked, setcalcclicked] = useState(false);
 
-  
-  
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setcalcclicked(true);
+    console.log(calcclicked);
+    setTimeout(() => {
+      const R = document.getElementById("results");
+      if (R) {
+        R.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 300);
 
     const data = [[], [], [], [], []];
 
@@ -39,7 +45,7 @@ export default function App() {
       const stockLength = document.getElementById("stockLength" + i);
       if (stockLength) {
         data[2].push(stockLength.value);
-        data[2].sort((a, b) => a - b)
+        data[2].sort((a, b) => a - b);
       }
       const stockQuantity = document.getElementById("stockQuantity" + i);
       if (stockQuantity && stockQuantity.value) {
@@ -66,31 +72,34 @@ export default function App() {
 
       if (response.ok) {
         console.log("Data sent successfully");
-        setResults(responseData)
-          setinputdata(data)
-          setTimeout(() => {
-            const R = document.getElementById("results")
-            if(R){
-              R.scrollIntoView({ behavior: "smooth" })
+        setResults(responseData);
+        setinputdata(data);
+        setcalcclicked(false);
+        console.log(calcclicked);
+        setTimeout(() => {
+          const R = document.getElementById("results");
+          if (R) {
+            R.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 300);
 
-            }
-          }, 300);
-          console.log("result generated successfully");
-        
+        console.log("result generated successfully");
       } else {
         console.error("Failed to send data");
+        setcalcclicked(false);
+        console.log(calcclicked);
       }
     } catch (error) {
       console.error("Error sending data:", error);
-      }
+      setcalcclicked(false);
+      console.log(calcclicked);
     }
-
-    
-  
+  };
 
   return (
     <div className="flex flex-col items-center justify-center max-w-screen overflow-x-hidden min-h-screen z-10 ">
       <div className="w-full h-full flex flex-col items-center justify-center   z-20">
+        <Description />
         <Stockform />
         <Demandform />
 
@@ -101,7 +110,11 @@ export default function App() {
         >
           Calculate cutting plan
         </button>
-        <Createresults response={Results} inputdata={inputdata} />
+        <Createresults
+          response={Results}
+          inputdata={inputdata}
+          clicked={calcclicked}
+        />
       </div>
       <BG />
     </div>

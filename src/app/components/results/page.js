@@ -1,15 +1,40 @@
 import React from "react";
 import { useRef } from "react";
+import Loading from "../loading/page";
 
-export default function Createresults({ response, inputdata }) {
-  if (response != null && response.result != 0 && inputdata != null && inputdata != 0) {
+export default function Createresults({ response, inputdata, clicked }) {
+  if (clicked == true) {
+    return (
+      <div className="flex flex-col items-center w-full z-50" id="results">
+        <div className="sfc relative flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[5px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden">
+          <h2 className="flex left-2 text-lg pb-2 text-[34px] ">Calculating...</h2>
+          <Loading />
+        </div>
+      </div>
+    );
+  }else if(response.result == 0 && clicked == false){
+    return (
+      <div className="flex flex-col items-center w-full z-50" id="results">
+        <div className="sfc relative flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[5px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden">
+          <h2 className="flex left-2 text-lg pb-2 text-[38px] text-red-400 ">ERROR</h2>
+          <p className=" relative flex left-2 text-lg h-52 pb-2 text-md text-red-400 ">-Timeout</p>
+        </div>
+      </div>
+    );
+  }else if(
+    response != null &&
+    response.result != 0 &&
+    inputdata != null &&
+    inputdata != 0 &&
+    clicked == false
+  ) {
     const colors = [
-      "rgb(124, 22, 0)",
-      "rgb(10, 124, 0)",
-      "rgb(0, 30, 124)",
-      "rgb(124, 106, 0)",
-      "rgb(124, 0, 122)",
-      "rgb(0, 120, 124)",
+      "#966969",
+      "#6E9669",
+      "#697B96",
+      "#969669",
+      "#926996",
+      "#699690",
     ];
     const numericInput = inputdata[2].map(Number);
     const maxInput = Math.max(...numericInput);
@@ -32,7 +57,7 @@ export default function Createresults({ response, inputdata }) {
 
     return (
       <div className="flex flex-col items-center w-full " id="results">
-        <div className="sfc relative flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[2px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden">
+        <div className="sfc relative flex flex-col items-center w-9/12 transition-all bg-blur backdrop-blur-[5px] duration-300 ease-in-out rounded-md border-2 border-zinc-700 p-2 pt-6 overflow-hidden">
           <h2 className="flex left-2 text-lg pb-2 text-[34px] ">Results</h2>
 
           <div className=" relative fade-in-button overflow-x-hidden w-[95%] flex flex-col float-left items-left transition-all duration-300 ease-in-out justify-center bg-zinc-800 text-white p-2 pl-4 pr-4 rounded-md border-2 border-zinc-500 mt-2 h-auto">
@@ -58,7 +83,7 @@ export default function Createresults({ response, inputdata }) {
             })}
 
             <div className="flex flex-col-2 pb-4 responzivecol22">
-            <div className="flex w-1/2 responzivecol text-[72px] font-extrabold justify-center text-center items-center">
+              <div className="flex w-1/2 responzivecol text-[72px] font-extrabold justify-center text-center items-center">
                 {parseFloat((totaldemandlength / totalcutlength) * 100).toFixed(
                   2
                 )}
@@ -113,9 +138,6 @@ export default function Createresults({ response, inputdata }) {
                   );
                 })}
               </div>
-              
-
-              
             </div>
 
             <div className="w-full h-[3px] bg-zinc-700 mt-4 mb-2"></div>
@@ -255,10 +277,10 @@ export default function Createresults({ response, inputdata }) {
                     }}
                   >
                     {response.result[1][index][0].map((item, itemIndex) => {
-                      let deg = 0
-                      if(window.screenX < 700){
-                        deg = 90
-                        console.log(window.screenX, deg)
+                      let deg = 0;
+                      if (window.screenX < 700) {
+                        deg = 90;
+                        console.log(window.screenX, deg);
                       }
                       if (item !== 0) {
                         return Array.from({ length: item }).map(
@@ -275,10 +297,10 @@ export default function Createresults({ response, inputdata }) {
                               }}
                             >
                               <p className="labell transition-all duration-150 ease-in-out">
-                              {inputdata[0][itemIndex]}
-                              <span className=" text-zinc-300 font-normal">
-                                mm
-                              </span>
+                                {inputdata[0][itemIndex]}
+                                <span className=" text-zinc-300 font-normal">
+                                  mm
+                                </span>
                               </p>
                             </div>
                           )

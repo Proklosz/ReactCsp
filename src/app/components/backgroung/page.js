@@ -63,7 +63,7 @@ export default function BG() {
   return (
     <div className=" top-0 fixed w-full h-screen z-0">
       <Canvas
-        className="fixed w-full h-screen bg-black"
+        className="fixed w-full h-screen bg-darkgray"
         camera={{ position: [0, 0, 5] }}
       >
         {/* Add lighting */}
